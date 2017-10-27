@@ -25,7 +25,7 @@ describe('app', () => {
       request('http://localhost:3000', (err, res, body) => {
         expect(err).to.equal(null)
         expect(res.statusCode).to.equal(200)
-        expect(body).to.equal('{"name":"continuous-delivery","description":"A practice respository for testing and deployment."}')
+        expect(body).to.equal('{"name":"continuous-delivery","description":"A practice respository for testing and deployment.","link":"https://github.com/youngmlee/continuous-delivery"}')
         done()
       })
     })
