@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "A practice repository for testing and deployment.",
   "main": "index.js",
+  "engines": {
+    "node": "8.8.0"
+  },
   "scripts": {
     "start": "node .",
     "watch": "nodemon .",
