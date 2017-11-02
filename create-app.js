@@ -13,7 +13,7 @@ module.exports = function createApp() {
     })
   })
 
-  app.get('/todo-app', async (req, res) => {
+  app.get('/todos', async (req, res) => {
     MongoClient.connect('mongodb://localhost/todo-app', async (err, db) => {
       const todos = todosGateway(db.collection('todos'))
       const displayed = await todos.display()
