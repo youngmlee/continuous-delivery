@@ -31,4 +31,16 @@ describe('app', () => {
     })
   })
 
+  describe('GET /todos', () => {
+
+    it('responds with a list of todos', done => {
+      request('http://localhost:3000/todos', {json: true}, (err, res, body) => {
+        expect(err).to.equal(null)
+        expect(res.statusCode).to.equal(200)
+        expect(body).to.be.an('array')
+        done()
+      })
+    })
+  })
+
 })
