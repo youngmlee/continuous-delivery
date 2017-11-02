@@ -44,8 +44,10 @@ describe('todosGateway', () => {
   describe('createTodo', () => {
 
     it('saves a todo to the database and returns it', async () => {
-      const created = await todos.createTodo()
-      expect(created).have.property('id')
+      const created = await todos.createTodo({test: 'testing'})
+      expect(created).to.be.an('object')
+      expect(created).to.have.property('test')
+      expect(created).to.have.property('_id')
     })
   })
 

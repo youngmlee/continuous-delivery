@@ -25,6 +25,7 @@ module.exports = function createApp() {
   })
 
   app.use(bodyParser.json())
+  app.use(express.static(path.join(__dirname, 'public')))
 
   app.post('/todos', async (req, res) => {
     MongoClient.connect('mongodb://localhost/todo-app', async (err, db) => {
