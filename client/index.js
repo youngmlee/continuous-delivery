@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import TodoForm from './todo-form'
 
 ReactDOM.render(
-  <TodoForm />
+  <TodoForm />,
   document.querySelector('.container')
 )
