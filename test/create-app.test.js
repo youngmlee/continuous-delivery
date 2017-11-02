@@ -1,7 +1,7 @@
 const { describe, before, after, it } = require('mocha')
 const { expect } = require('chai')
 const request = require('request')
-const createApp = require('../create-app')
+const createApp = require('../server/create-app')
 
 describe('app', () => {
   const app = createApp()
@@ -34,6 +34,18 @@ describe('app', () => {
   describe('GET /todos', () => {
 
     it('responds with a list of todos', done => {
+      request('http://localhost:3000/todos', {json: true}, (err, res, body) => {
+        expect(err).to.equal(null)
+        expect(res.statusCode).to.equal(200)
+        expect(body).to.be.an('array')
+        done()
+      })
+    })
+  })
+
+  describe('POST /todos', () => {
+
+    it('responds with the newly saved todo', done => {
       request('http://localhost:3000/todos', {json: true}, (err, res, body) => {
         expect(err).to.equal(null)
         expect(res.statusCode).to.equal(200)
