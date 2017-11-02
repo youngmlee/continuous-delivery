@@ -2,6 +2,7 @@ const { describe, before, beforeEach, after, it } = require('mocha')
 const { expect } = require('chai')
 const { MongoClient } = require('mongodb')
 const todosGateway = require('../todos-gateway')
+const uuid = require('uuid/v4')
 
 describe('todosGateway', () => {
 
@@ -31,51 +32,12 @@ describe('todosGateway', () => {
     })
   })
 
-  describe('create', () => {
-
-    it('inserts and returns a new todo object with an id', async () => {
-      const newTodo = { task: 'learn to test', dueDate: new Date() }
-      const created = await todos.create(newTodo)
-      expect(created)
-        .to.include(newTodo)
-        .and.have.property('id')
-        .that.is.a('string')
-      const doc = await collection.findOne({ id: created.id })
-      expect(doc).to.deep.equal(created)
-    })
-
-  })
-
-  describe('findById', () => {
-
-    describe('when the todo exists', () => {
-
-      it('returns the found todo', async () => {
-        const found = await todos.findById(testId)
-        expect(found)
-          .to.be.an('object')
-          .with.property('id')
-          .that.equals(testId)
-      })
-
-    })
-
-    describe('when the todo does not exist', () => {
-
-      it('returns null', async () => {
-        const found = await todos.findById('lol')
-        expect(found).to.equal(null)
-      })
-
-    })
-
-  })
-
   describe('display', () => {
 
     it('responds with a list of todos from the database', async () => {
       const displayed = await todos.display()
-      expect(displayed).to.have.property('id')
+      expect(displayed).to.have.length(1)
+      expect(displayed[0]).to.have.property('id')
     })
   })
 
