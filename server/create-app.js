@@ -6,8 +6,9 @@ const path = require('path')
 
 module.exports = function createApp() {
   const app = express()
+  app.use(express.static(path.join(__dirname, 'public')))
 
-  app.get('/', (req, res) => {
+  app.get('/api', (req, res) => {
     res.json({
       name: 'continuous-delivery',
       description: 'A practice respository for testing and deployment.',
@@ -15,7 +16,7 @@ module.exports = function createApp() {
     })
   })
 
-  app.get('/todos', async (req, res) => {
+  app.get('/api/todos', async (req, res) => {
     MongoClient.connect('mongodb://localhost/todo-app', async (err, db) => {
       const todos = todosGateway(db.collection('todos'))
       const displayed = await todos.display()
@@ -26,12 +27,11 @@ module.exports = function createApp() {
   })
 
   app.use(bodyParser.json())
-  app.use(express.static(path.join(__dirname, 'public')))
 
-  app.post('/todos', async (req, res) => {
+  app.post('/api/todos', async (req, res) => {
     MongoClient.connect('mongodb://localhost/todo-app', async (err, db) => {
       const todos = todosGateway(db.collection('todos'))
-      todos
+      await todos
         .createTodo(req.body)
         .then(created => res.json(created))
 

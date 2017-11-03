@@ -13,6 +13,11 @@ export default class TodoForm extends Component {
       task: formData.get('task')
     }
     console.log(JSON.stringify(data))
+    fetch('/api/todos', {
+      method: 'POST',
+      body: JSON.stringify(data),
+      headers: { "Content-Type": "application/json" }
+    })
     event.target.reset()
   }
 
@@ -21,7 +26,7 @@ export default class TodoForm extends Component {
       <form onSubmit={ this.handleSubmit }>
         <div className='form-group'>
           <label htmlFor='task'>Task</label>
-          <input name='task' id='task' type='text' className='form-control' />
+          <input name='task' id='task' type='text' className='form-control form-control-lg' placeholder='Enter new task' />
         </div>
       </form>
     )
