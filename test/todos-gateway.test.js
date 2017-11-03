@@ -1,7 +1,7 @@
 const { describe, before, beforeEach, after, it } = require('mocha')
 const { expect } = require('chai')
 const { MongoClient } = require('mongodb')
-const todosGateway = require('../todos-gateway')
+const todosGateway = require('../server/todos-gateway')
 const uuid = require('uuid/v4')
 
 describe('todosGateway', () => {
@@ -38,6 +38,16 @@ describe('todosGateway', () => {
       const displayed = await todos.display()
       expect(displayed).to.have.length(1)
       expect(displayed[0]).to.have.property('id')
+    })
+  })
+
+  describe('createTodo', () => {
+
+    it('saves a todo to the database and returns it', async () => {
+      const created = await todos.createTodo({test: 'testing'})
+      expect(created).to.be.an('object')
+      expect(created).to.have.property('test')
+      expect(created).to.have.property('_id')
     })
   })
 
