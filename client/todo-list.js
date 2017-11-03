@@ -1,11 +1,11 @@
 import React from 'react'
 
 const renderTask = ({ _id, task }) =>
-  <li key={ _id }>{ task }</li>
+  <li className='list-group-item' key={ _id }>{ task }</li>
 
 export default function TodoList({ tasks }) {
   return (
-    <ol>
+    <ol className='list-group'>
       { tasks.map(renderTask) }
     </ol>
   )
