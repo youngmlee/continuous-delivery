@@ -1,3 +1,4 @@
+require ('dotenv/config')
 const { describe, before, after, it } = require('mocha')
 const { expect } = require('chai')
 const request = require('request')
@@ -22,7 +23,7 @@ describe('app', () => {
   describe('GET /api', () => {
 
     it ('responds with JSON including the name and description of the repo.', done => {
-      request('http://localhost:3000/api', (err, res, body) => {
+      request('http://localhost:' + process.env.PORT + '/api', (err, res, body) => {
         expect(err).to.equal(null)
         expect(res.statusCode).to.equal(200)
         expect(body).to.equal('{"name":"continuous-delivery","description":"A practice respository for testing and deployment.","link":"https://github.com/youngmlee/continuous-delivery"}')
@@ -34,7 +35,7 @@ describe('app', () => {
   describe('GET /api/todos', () => {
 
     it('responds with a list of todos', done => {
-      request('http://localhost:3000/api/todos', {json: true}, (err, res, body) => {
+      request('http://localhost:' + process.env.PORT + '/api/todos', {json: true}, (err, res, body) => {
         expect(err).to.equal(null)
         expect(res.statusCode).to.equal(200)
         expect(body).to.be.an('array')
@@ -46,7 +47,7 @@ describe('app', () => {
   describe('POST /api/todos', () => {
 
     it('responds with the newly saved todo', done => {
-      request('http://localhost:3000/api/todos', {json: true}, (err, res, body) => {
+      request('http://localhost:' + process.env.PORT + '/api/todos', {json: true}, (err, res, body) => {
         expect(err).to.equal(null)
         expect(res.statusCode).to.equal(200)
         expect(body).to.be.an('array')
