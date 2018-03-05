@@ -1,0 +1,23 @@
+.container {
+  margin-top: 4%;
+  width: 100%;
+  border: 2px inset blue;
+  background-color: #88b04b;
+}
+
+button {
+  margin-top: 1%;
+}
+
+ol {
+  font-family: Garamond;
+  padding-bottom: 2%;
+  width: 100%;
+  height: 55vh;
+  overflow: scroll;
+}
+
+label {
+  font-size: 2em;
+  font-family: serif;
+}

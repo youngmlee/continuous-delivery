@@ -1,34 +1,15 @@
 import React, { Component } from 'react'
 
-export default class TodoForm extends Component {
-  constructor(props) {
-    super(props)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
-
-  handleSubmit(event) {
-    event.preventDefault()
-    const formData = new FormData(event.target)
-    const data = {
-      task: formData.get('task')
-    }
-    console.log(JSON.stringify(data))
-    fetch('/api/todos', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: { "Content-Type": "application/json" }
-    })
-    event.target.reset()
-  }
-
-  render() {
-    return (
-      <form onSubmit={ this.handleSubmit }>
-        <div className='form-group'>
-          <label htmlFor='task'>Task</label>
-          <input name='task' id='task' type='text' className='form-control form-control-lg' placeholder='Enter new task' />
+export default function TodoForm({ handleSubmit }) {
+  return (
+    <form onSubmit={ handleSubmit }>
+      <div className='form-group'>
+        <label htmlFor='task'>My to-do list!</label>
+        <input name='task' id='task' type='text' className='form-control form-control-lg' placeholder='Enter new task' required />
+        <div className="invalid-feedback">
         </div>
-      </form>
-    )
-  }
+        <button type='submit' className='btn btn-primary'>Submit</button>
+      </div>
+    </form>
+  )
 }
